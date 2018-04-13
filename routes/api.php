@@ -17,22 +17,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/partida/{id_partida}' , function($id_partida)
-	$partida = 
-)
+Route::get('/partida/{id_partida}' , function($id_partida){
+	$partida = new Partida();
+});
 
 
-Route::get('/en_espera' , function()
-)
+Route::get('/en_espera' , function(){
 
-Route::get('/juga/{jugador1}/{jugador2}' , function($jugador1 , $jugador2)
-)
+});
 
-Route::get('/login/{nick}/{email}' , function($nick , $email)
+Route::get('/juga/{jugador1}/{jugador2}' , function($jugador1 , $jugador2){
+
+});
+
+Route::get('/login/{nick}/{email}' , function($nick , $email){
 	$usuario = new Usuario();
 	$usuario->id =1;
 	$usuario->name=""
-)
+});
 
-Route::get('/mou/{id_partida}/{fila_ini}/{col_ini}/{fila_dest}/{col_dest}' , function($id_partida , $fila_ini , $col_ini , $fila_dest, $col_dest)
-)
+Route::get('/mou/{id_partida}/{fila_ini}/{col_ini}/{fila_dest}/{col_dest}' , function($id_partida , $fila_ini , $col_ini , $fila_dest, $col_dest){
+
+});
