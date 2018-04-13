@@ -23,6 +23,8 @@ Route::get('/partida/{id_partida}' , function($id_partida){
 
 
 Route::get('/en_espera' , function(){
+	 $espera = User::where('espera',0)->get();
+	 return (['arrayListaEspera' => $espera]);
 
 });
 
