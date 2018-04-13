@@ -33,7 +33,7 @@ Route::get('/juga/{jugador1}/{jugador2}' , function($jugador1 , $jugador2){
 Route::get('/login/{nick}/{email}' , function($nick , $email){
 	$usuario = new Usuario();
 	$usuario->id =1;
-	$usuario->name=""
+	$usuario->name="Cyka";
 });
 
 Route::get('/mou/{id_partida}/{fila_ini}/{col_ini}/{fila_dest}/{col_dest}' , function($id_partida , $fila_ini , $col_ini , $fila_dest, $col_dest){
