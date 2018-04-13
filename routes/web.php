@@ -29,3 +29,7 @@ Route::group(['middleware' => ['auth:api']], function () {
         return $user;
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
