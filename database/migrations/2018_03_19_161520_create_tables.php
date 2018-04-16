@@ -14,7 +14,7 @@ class CreateTables extends Migration
     public function up()
     {
 
-        Schema::create('Partida', function (Blueprint $table) {
+        Schema::create('partida', function (Blueprint $table) {
             $table->increments('id_partida');
             $table->string('estado');
 
@@ -27,7 +27,7 @@ class CreateTables extends Migration
         });
 
         
-        Schema::create('Fichas', function (Blueprint $table) {
+        Schema::create('fichas', function (Blueprint $table) {
             $table->increments('id_ficha');
             $table->integer('posicionX');
             $table->integer('posicionY');

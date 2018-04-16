@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Partida;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}' , function($jugador1,$jugador2
 	$partida->jugador1=$jugador1;
 	$partida->jugador2=$jugador2;
 
-	return ("partia");
+	return ($partida);
 
 });
 
@@ -36,11 +37,14 @@ Route::get('/en_espera' , function(){
 	return $espera;
 });
 
-Route::get('/juga/{jugador1}/{jugador2}' , function($jugador1 , $jugador2){
+Route::get('/partida/{id_partida}' , function(){
 
+	return ($partida);
 });
 
-Route::get('/login/{nick}/{email}' , function($nick , $email){
+
+//ID cuando entras partida
+Route::get('/identificadorUsuario/{nick}/{email}' , function($nick , $email){
 	$usuario = new Usuario();
 	$usuario->id =1;
 	$usuario->name="Cyka";
