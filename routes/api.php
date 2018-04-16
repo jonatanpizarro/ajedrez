@@ -44,7 +44,7 @@ Route::get('/partida/{id_partida}' , function(){
 
 
 Route::get('/login/{jugador1}/{password}' , function($jugador1, $password){
-	if (Auth::attempt('id'=> $jugador1, 'password'=>$password)) {
+	if (Auth::attempt(['id'=> $jugador1, 'password'=>$password])) {
 		return("aaa");
 	}
 
