@@ -37,7 +37,7 @@ class CreateTables extends Migration
             $table->foreign('jugador')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('id_partida')->unsigned();
-            $table->foreign('id_partida')->references('id_partida')->on('Partida')->onDelete('cascade');
+            $table->foreign('id_partida')->references('id_partida')->on('partida')->onDelete('cascade');
             $table->timestamps();
         });
 
