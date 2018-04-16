@@ -24,7 +24,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}' , function($jugador1,$jugador2
 	$partida->jugador1=$jugador1;
 	$partida->jugador2=$jugador2;
 
-	return ($partida);
+	return ("partia");
 
 });
 
