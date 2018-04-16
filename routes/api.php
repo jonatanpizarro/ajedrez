@@ -44,10 +44,11 @@ Route::get('/partida/{id_partida}' , function(){
 
 
 Route::get('/login/{jugador1}/{password}' , function($jugador1, $password){
-	$usuario = User::where('id', $jugador1)
-		->where('password', $password)
-		->get();
-	return ($usuario);
+	if (Auth::attempt('id'=> $jugador1, 'password'=>$password)) {
+		return("aaa");
+	}
+
+	
 });
 
 
