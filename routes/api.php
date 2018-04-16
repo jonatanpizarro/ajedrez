@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,10 @@ Route::get('/partida/{id_partida}' , function($id_partida){
 
 
 Route::get('/en_espera' , function(){
-	 $espera = User::where('espera',0)->get();
-	 return $espera;
-
+	
+	//$espera = User::where('espera', 0)->get();
+	$espera = User::All();
+	return $espera;
 });
 
 Route::get('/juga/{jugador1}/{jugador2}' , function($jugador1 , $jugador2){
