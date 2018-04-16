@@ -48,7 +48,9 @@ Route::get('/login/{jugador1}/{password}' , function($jugador1, $password){
 		return("aaa");
 	}
 
-	
+	else {
+		return("bbb");
+	}
 });
 
 
