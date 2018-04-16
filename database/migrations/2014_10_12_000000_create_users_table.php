@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('espera')->default(0);
             $table->rememberToken();
             $table->timestamps();
-            $table->string('api_token')->unique()->default(0);
+            $table->string('api_token')->default(0);
         });
     }
 

@@ -18,8 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/partida/{id_partida}' , function($id_partida){
+Route::get('/crear_partida/{jugador1}/{jugador2}' , function($jugador1,$jugador2){
 	$partida = new Partida();
+	$partida->estado=0;
+	$partida->jugador1=$jugador1;
+	$partida->jugador2=$jugador2;
+
+	return ($partida);
+
 });
 
 
