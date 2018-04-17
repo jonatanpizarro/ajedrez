@@ -51,7 +51,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 			
 			User::where(['name'=> $name, 'password'=>$password])->update(['api_token'=>$rand_part]);	
 
-			$user = User::where(['name'=> $name, 'password'=>$password])->get();
+			$user = User::where('name',$name)->get();
 			return json_encode($user);		
 		}
 
