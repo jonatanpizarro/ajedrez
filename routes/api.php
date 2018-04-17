@@ -54,6 +54,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 					->update(['api_token'=>$rand_part]);	
 
 			$user = User::where('name',$name )->get();
+			 header("Access-Control-Allow-Origin: *");
 			return json_encode($user);		
 		}
 
