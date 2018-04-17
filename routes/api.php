@@ -45,11 +45,13 @@ Route::get('/partida/{id_partida}' , function(){
 
 Route::get('/login/{jugador1}/{password}' , function($jugador1, $password){
 	if (Auth::attempt(['id'=> $jugador1, 'password'=>$password])) {
-		return("aaa");
+		//$user = User::where('api_token', 0)->get();
+		return("ok");
+		
 	}
 
 	else {
-		return("bbb");
+		return("no ok");
 	}
 });
 
