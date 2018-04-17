@@ -45,9 +45,10 @@ Route::get('/partida/{id_partida}' , function(){
 
 Route::get('/login/{name}/{password}' , function($name, $password){
 	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {
-		$user = User::where('api_token', 0)->
-					where('name',$name )->
-					wehre('password' , $password)->get();
+		$user = User::where('name',$name )->
+					where('password' , $password)->get();
+
+
 		return($user);
 		
 	}
