@@ -43,10 +43,12 @@ Route::get('/partida/{id_partida}' , function(){
 });
 
 
-Route::get('/login/{jugador1}/{password}' , function($jugador1, $password){
-	if (Auth::attempt(['id'=> $jugador1, 'password'=>$password])) {
-		//$user = User::where('api_token', 0)->get();
-		return("ok");
+Route::get('/login/{name}/{password}' , function($name, $password){
+	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {
+		$user = User::where('api_token', 0)->
+					where('name',$name )->
+					wehre('password' , $password)->get();
+		return($user);
 		
 	}
 
