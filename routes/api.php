@@ -64,6 +64,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 	}
 
 	else {
+		header("Access-Control-Allow-Origin: *");
 		return("no ok");
 	}
 });
