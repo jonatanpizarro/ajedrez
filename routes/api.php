@@ -49,8 +49,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 		if (Auth::attempt(['name'=> $name, 'password'=>$password, 'api_token'=>0])){
 			$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());
 			
-			User::where('name',$name )
-					->where('password' , $password)
+			User::where('name',$name )					
 					->update(['api_token'=>$rand_part]);	
 
 			$user = User::where('name',$name )->get();
