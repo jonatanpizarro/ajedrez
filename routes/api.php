@@ -47,7 +47,7 @@ Route::get('/partida/{id_partida}' , function(){
 //login
 Route::get('/login/{name}/{password}' , function($name, $password){
 	//comprueba si es la primera vez que se loguea y se le da un token
-	if (Auth::attempt(['name'=> $name, 'password'=>$password, 'api_token'=>0])) {	
+	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {	
 
 		if (User::where(['name'=> $name, 'password'=>$password, 'api_token'=>0])) {
 			$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());
