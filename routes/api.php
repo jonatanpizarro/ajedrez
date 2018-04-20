@@ -33,7 +33,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}' , function($jugador1,$jugador2
 
 Route::get('/en_espera/{token}' , function($token){
 	
-	$espera = User::where('espera', 0)->where('api_token',$token)->select('name')->get();
+	$espera = User::where('espera', 0)->where('api_token','!=',$token)->select('name')->get();
 	header("Access-Control-Allow-Origin: *");
 	return json_encode(array('estado'=>'ok','nombre' =>$espera ));
 	
