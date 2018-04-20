@@ -59,7 +59,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 			$user = User::where('name',$name )->select('api_token')->get();
 			return($user);
 			header("Access-Control-Allow-Origin: *");
-			return json_encode(array('estado'=>'ok','token' =>$user ));
+			return json_encode(array('estado'=>'ok','token' =>$user ));}}
 			
 
 	else if(Auth::attempt(['name'=> $name, 'password'=>$password, 'api_token','!=',0])){
@@ -68,7 +68,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 			return json_encode(array('estado'=>'ok','token' =>$user ));
 			
 		}	
-	}
+	
 
 	else {
 		header("Access-Control-Allow-Origin: *");
