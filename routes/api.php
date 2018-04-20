@@ -49,16 +49,16 @@ Route::get('/partida/{id_partida}' , function(){
 Route::get('/login/{name}/{password}' , function($name, $password){
 	//comprueba si es la primera vez que se loguea y se le da un token
 	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {	
+		$user = User::where('name',$name )->select('api_token')->get();
 
-		if (Auth::attempt(['name'=> $name, 'password'=>$password])) {
+		if ($user==0) {
 
 			$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());			
 			User::where('name', $name)->update(['api_token',$rand_part]);
 			
 
 			$user = User::where('name',$name )->select('api_token')->get();
-			header("Access-Control-Allow-Origin: *");
-			return($user);
+			//return($user);
 			header("Access-Control-Allow-Origin: *");
 			return json_encode(array('estado'=>'ok','token' =>$user ));
 			}	
