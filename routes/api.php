@@ -53,7 +53,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 			$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());			
 			User::where('name', $name)->update(['api_token',$rand_part]);
-			$user = User::where('name',$name )select('api_token')->get();
+			$user = User::where('name',$name )->select('api_token')->get();
 
 			header("Access-Control-Allow-Origin: *");
 			return("oaaaa");
