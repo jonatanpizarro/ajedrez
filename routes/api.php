@@ -57,13 +57,13 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 				User::where('name', $name)->update(['api_token',$rand_part]);
 				$token1 = User::where('name',$name )->select('api_token')->get();
-				header("Access-Control-Allow-Origin: *");
-						
-				return json_encode(array('estado'=>'ok','token' =>$token1 ));
+				header("Access-Control-Allow-Origin: *");						
+				return("nuevo");
+				//return json_encode(array('estado'=>'ok','token' =>$token1 ));
 			}else{
-				header("Access-Control-Allow-Origin: *");		
-				
-				return json_encode(array('estado'=>'ok','token' =>$token ));
+				header("Access-Control-Allow-Origin: *");	
+				return("ya tiene");			
+				//return json_encode(array('estado'=>'ok','token' =>$token ));
 			}
 
 			
