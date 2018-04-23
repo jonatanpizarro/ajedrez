@@ -48,20 +48,24 @@ Route::get('/partida/{id_partida}' , function(){
 //login
 Route::get('/login/{name}/{password}' , function($name, $password){
 	//comprueba si es la primera vez que se loguea y se le da un token
-	if (Auth::attempt(['name'=> $name, 'password'=>$password, 'api_token'=>'0'])) {	
+	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {	
 
-			$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());			
+			$token = User::where('name',$name )->select('api_token')->get();
+			if ($token==0){
+				$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());			
 			User::where('name', $name)->update(['api_token',$rand_part]);
-			
+			}
 
-			$user = User::where('name',$name )->select('api_token')->get();
-			return($user);
+			
+			//$token = User::where('name',$name )->select('api_token')->get();
+			//return($user);
 			header("Access-Control-Allow-Origin: *");
-			return json_encode(array('estado'=>'ok','token' =>$user ));}
+			return json_encode(array('estado'=>'ok','token' =>$token ));
+		}
 			
 
 	else if(Auth::attempt(['name'=> $name, 'password'=>$password])){
-			$user = User::where('name',$name )->select('api_token')->get();
+			$token = User::where('name',$name )->select('api_token')->get();
 			header("Access-Control-Allow-Origin: *");
 			return json_encode(array('estado'=>'ok','token' =>$user ));
 			
@@ -70,7 +74,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 	else {
 		header("Access-Control-Allow-Origin: *");
-		return("registrado");
+		return("no existe");
 	}
 });
 
