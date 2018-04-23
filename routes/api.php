@@ -54,14 +54,16 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 			if ($token[0]=='0'){
 				$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());			
 				User::where('name', $name)->update(['api_token',$rand_part]);
+				header("Access-Control-Allow-Origin: *");			
+				return json_encode(array('estado'=>'ok','token' =>$token ));
+			}else{
+				header("Access-Control-Allow-Origin: *");			
+				return json_encode(array('estado'=>'ok','token' =>$token ));
 			}
 
 			
 			//$token = User::where('name',$name )->select('api_token')->get();
 			//return($user);
-			header("Access-Control-Allow-Origin: *");
-			return("a");
-			//return json_encode(array('estado'=>'ok','token' =>$token ));
 		}
 			
 
