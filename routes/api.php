@@ -21,8 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){
-	User::where('api_token', $token)->update(['estado'=>"2"]);
-	User::where('id', $jugador2)->update(['estado'=>"1"]);
+	User::where('api_token', $token)->update(['espera'=>"2"]);
+	User::where('id', $jugador2)->update(['espera'=>"2"]);
 
 
 
@@ -58,7 +58,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 				User::where('name', $name)->update(['api_token'=>$rand_part]);
 
-				User::where('name', $name)->update(['estado'=>"1"]);
+				User::where('name', $name)->update(['espera'=>"1"]);
 
 				$id=User::where('name',$name )->select('id')->get();
 
