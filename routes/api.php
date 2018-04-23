@@ -60,7 +60,8 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 			//$token = User::where('name',$name )->select('api_token')->get();
 			//return($user);
 			header("Access-Control-Allow-Origin: *");
-			return json_encode(array('estado'=>'ok','token' =>$token ));
+			return("a");
+			//return json_encode(array('estado'=>'ok','token' =>$token ));
 		}
 			
 
