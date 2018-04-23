@@ -69,6 +69,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 				return json_encode(array('estado'=>'ok','token' =>$token1, 'id'=>$id ));
 			}else{
 				User::where('name', $name)->update(['espera'=>1]);
+				$id=User::where('name',$name )->select('id')->get();
 				header("Access-Control-Allow-Origin: *");	
 				//return("ya tiene");			
 				return json_encode(array('estado'=>'ok','token' =>$token, 'id'=>$id ));
