@@ -71,7 +71,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 				User::where('name', $name)->update(['espera'=>1]);
 				header("Access-Control-Allow-Origin: *");	
 				//return("ya tiene");			
-				return json_encode(array('estado'=>'ok','token' =>$token ));
+				return json_encode(array('estado'=>'ok','token' =>$token, 'id'=>$id ));
 			}
 
 			
