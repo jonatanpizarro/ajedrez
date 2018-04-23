@@ -50,8 +50,8 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 	//comprueba si es la primera vez que se loguea y se le da un token
 	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {	
 
-			$token = User::where('name',$name )->select('api_token')->get();
-			header("Access-Control-Allow-Origin: *");
+			$token = User::where('name',$name )->select('api_token')->pluck('api_token');
+			//header("Access-Control-Allow-Origin: *");
 			return($token[0]);
 			if ($token[0]=="0"){
 				$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());	
