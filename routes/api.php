@@ -20,11 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2){
-	$partida = new Partida();
-	$partida->estado=0;
-	$partida->jugador1=$jugador1;
-	$partida->jugador2=$jugador2;
+Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){
+	User::where('api_token', $token)->update(['estado'=>"2"]);
+	User::where('id', $jugador2)->update(['estado'=>"1"]);
+
+
+
 	header("Access-Control-Allow-Origin: *");
 	return ($partida);
 
@@ -33,7 +34,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 Route::get('/en_espera/{token}' , function($token){
 	
-	$espera = User::where('espera', 0)->where('api_token','!=',$token)->select('name')->get();
+	$espera = User::where('espera', "1")->where('api_token','!=',$token)->select('name')->get();
 	header("Access-Control-Allow-Origin: *");
 	return json_encode(array('estado'=>'ok','nombre' =>$espera ));
 	
@@ -56,10 +57,16 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 				$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());	
 
 				User::where('name', $name)->update(['api_token'=>$rand_part]);
+
+				User::where('name', $name)->update(['estado'=>"1"]);
+
+				$id=User::where('name',$name )->select('id')->get();
+
 				$token1 = User::where('name',$name )->select('api_token')->get();
+
 				header("Access-Control-Allow-Origin: *");						
 				
-				return json_encode(array('estado'=>'ok','token' =>$token1 ));
+				return json_encode(array('estado'=>'ok','token' =>$token1, 'id'=>$id ));
 			}else{
 				header("Access-Control-Allow-Origin: *");	
 				//return("ya tiene");			
