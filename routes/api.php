@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){
+	
 	User::where('api_token', $token)->update(['espera'=>2]);
 	User::where('id', $jugador2)->update(['espera'=>2]);
 
@@ -69,7 +70,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 				return json_encode(array('estado'=>'ok','token' =>$token1, 'id'=>$id ));
 			}else{
 				User::where('name', $name)->update(['espera'=>1]);
-				$id=User::where('name',$name )->select('id')->get();
+				$id=User::where('name',$name )->select('id')->pluck('id');
 				header("Access-Control-Allow-Origin: *");	
 				//return("ya tiene");			
 				return json_encode(array('estado'=>'ok','token' =>$token, 'id'=>$id ));
