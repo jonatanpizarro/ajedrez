@@ -37,6 +37,7 @@ Route::get('/en_espera/{token}' , function($token){
 	
 	$espera = User::where('espera', 1)->where('api_token','!=',$token)->select('name')->get();
 	header("Access-Control-Allow-Origin: *");
+
 	return json_encode(array('estado'=>'ok','nombre' =>$espera ));
 	
 });
