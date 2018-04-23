@@ -51,9 +51,9 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 	if (Auth::attempt(['name'=> $name, 'password'=>$password])) {	
 
 			$token = User::where('name',$name )->select('api_token')->get();
-			if ($token[0]==0){
+			if ($token[0]=='0'){
 				$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());			
-			User::where('name', $name)->update(['api_token',$rand_part]);
+				User::where('name', $name)->update(['api_token',$rand_part]);
 			}
 
 			
@@ -65,12 +65,12 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 		}
 			
 
-	else if(Auth::attempt(['name'=> $name, 'password'=>$password])){
+	/*else if(Auth::attempt(['name'=> $name, 'password'=>$password])){
 			$token = User::where('name',$name )->select('api_token')->get();
 			header("Access-Control-Allow-Origin: *");
 			return json_encode(array('estado'=>'ok','token' =>$user ));
 			
-		}	
+		}	*/
 	
 
 	else {
