@@ -33,7 +33,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 
 	header("Access-Control-Allow-Origin: *");
-	return ($partida);
+	return ("aa");
 
 });
 
