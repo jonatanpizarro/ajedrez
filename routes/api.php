@@ -36,10 +36,10 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 Route::get('/en_espera/{token}' , function($token){
 	
 	$espera = User::where('espera', 1)->where('api_token','!=',$token)->select('name')->get();
-	$id=User::where('name',$name )->select('id')->get();
+	$id=User::where('espera', 1)->where('api_token','!=',$token)->select('id')->get();
 	header("Access-Control-Allow-Origin: *");
 
-	return json_encode(array('estado'=>'ok','nombre' =>$espera, 'id'=>$id));
+	return json_encode(array('estado'=>'ok','nombre' =>$espera , 'id' =>$id));
 	
 });
 
