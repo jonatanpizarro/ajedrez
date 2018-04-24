@@ -21,12 +21,41 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){	
+	
 	User::where('api_token', $token)->update(['espera'=>0]);
 	User::where('id', $jugador2)->update(['espera'=>0]);
+
 	$partida = new Partida();
 	$partida->estado="empieza";
 	$partida->jugador1 =$jugador1;
 	$partida->jugador2=$jugador2;
+
+
+	header("Access-Control-Allow-Origin: *");
+	return ($partida);
+
+});
+
+
+
+Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){	
+
+	if (Partida::attempt(['jugador1'=>$jugador1])) {
+
+
+		return json_encode(array('estado'=>'Partida encontrada'));
+		
+	}else if(Partida::attempt(['jugador2'=>$jugador1])){
+
+		return json_encode(array('estado'=>'Partida encontrada'));
+
+	}else{
+
+		return json_encode(array('estado'=>'No encontrada'));
+
+
+	}
+
 
 
 	header("Access-Control-Allow-Origin: *");
@@ -67,11 +96,11 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 				$id=User::where('name',$name )->select('id')->pluck('id');
 
-				$token1 = User::where('name',$name )->select('api_token')->get();
+				//$token1 = User::where('name',$name )->select('api_token')->get();
 
 				header("Access-Control-Allow-Origin: *");						
 				
-				return json_encode(array('estado'=>'ok','token' =>$token1, 'id'=>$id ));
+				return json_encode(array('estado'=>'ok','token' =>$token, 'id'=>$id ));
 			}else{
 				User::where('name', $name)->update(['espera'=>1]);
 				$id=User::where('name',$name )->select('id')->pluck('id');
