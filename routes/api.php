@@ -24,6 +24,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 	User::where('api_token', $token)->update(['espera'=>0]);
 	User::where('id', $jugador2)->update(['espera'=>0]);
 	$partida = new Partida();
+	$partida->estado="empieza";
 	$partida->jugador1 =$jugador1;
 	$partida->jugador2=$jugador2;
 
