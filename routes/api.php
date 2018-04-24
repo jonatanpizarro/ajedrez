@@ -20,11 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){
-	
+Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){	
 	User::where('api_token', $token)->update(['espera'=>0]);
 	User::where('id', $jugador2)->update(['espera'=>0]);
-
+	$partida = new Partida();
+	$partida->jugador1 =$jugador1;
+	$partida->jugador2=$jugador2;
 
 
 	header("Access-Control-Allow-Origin: *");
