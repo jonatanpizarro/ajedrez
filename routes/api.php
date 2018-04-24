@@ -94,7 +94,6 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 				$rand_part = str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789".uniqid());	
 
 				User::where('name', $name)->update(['api_token'=>$rand_part]);
-
 				User::where('name', $name)->update(['espera'=>1]);
 
 				$id=User::where('name',$name )->select('id')->pluck('id');
