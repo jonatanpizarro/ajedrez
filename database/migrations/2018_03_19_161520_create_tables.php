@@ -15,7 +15,7 @@ class CreateTables extends Migration
     {
 
         Schema::create('partida', function (Blueprint $table) {
-            $table->increments('id_partida');
+            $table->increments('id');
             $table->string('estado');
 
             $table->integer('jugador1')->unsigned();
@@ -28,7 +28,7 @@ class CreateTables extends Migration
 
         
         Schema::create('fichas', function (Blueprint $table) {
-            $table->increments('id_ficha');
+            $table->increments('id');
             $table->integer('posicionX');
             $table->integer('posicionY');
             $table->string('nombreFicha');
