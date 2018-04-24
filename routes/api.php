@@ -29,6 +29,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 	$partida->estado="empieza";
 	$partida->jugador1 =$jugador1;
 	$partida->jugador2=$jugador2;
+	$partida->save();
 
 
 	header("Access-Control-Allow-Origin: *");
