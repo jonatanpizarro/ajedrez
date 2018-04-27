@@ -29,7 +29,7 @@ class CreateTables extends Migration
         
         Schema::create('fichas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('posicion');
+            $table->string('posicion');
             $table->string('nombreFicha');
 
             $table->integer('jugador')->unsigned();
