@@ -43,7 +43,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){	
 
-	$partida=Partida::where(['jugador1'=>$jugador1])->get();
+	$partida=Partida::where(['jugador1'=>$jugador1])->slect('jugador1')->get();
 	/*header("Access-Control-Allow-Origin: *");
 	return($partida);*/
 
