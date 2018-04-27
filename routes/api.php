@@ -48,8 +48,7 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 
 	if ($partida[0]==$jugador1) {
 		$idPartida=Partida::where('jugador1' , $jugador1)->select('id')->pluck('id');
-		header("Access-Control-Allow-Origin: *");
-		return  ($idPartida);
+		
 
 		header("Access-Control-Allow-Origin: *");
 		return json_encode(array('estado'=>'Partida encontrada' , 'idPartida' =>$idPartida));
@@ -57,8 +56,6 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 	}else if($partida1[0]==$jugador1){
 		$idPartida=Partida::where('jugador2' , $jugador1)->select('id')->pluck('id');
 
-		header("Access-Control-Allow-Origin: *");
-		return  ($idPartida);
 		header("Access-Control-Allow-Origin: *");
 		return json_encode(array('estado'=>'Partida encontrada' , 'idPartida' =>$idPartida));
 
