@@ -33,6 +33,23 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 	$partida->jugador2=$jugador2;
 	$partida->save();
 
+	$idP=Partida::where('jugador1',$jugador1)->select('id')->pluck('id');
+
+	$ficha = new Ficha();
+	$ficha->posicion="B1";
+	$ficha->nombreFicha="Rey";
+	$ficha->jugador=$jugador1;
+	$ficha->id_partida=$idP;
+	$ficha->save();
+
+	$ficha1 = new Ficha();
+	$ficha1->posicion="B8";
+	$ficha1->nombreFicha="Rey";
+	$ficha1->jugador=$jugador2;
+	$ficha1->id_partida=$idP;
+	$ficha1->save();
+
+
 
 	header("Access-Control-Allow-Origin: *");
 	return ($partida);
@@ -141,8 +158,8 @@ Route::get('/identificadorUsuario/{nick}/{email}' , function($nick , $email){
 	$usuario->name="Cyka";
 });
 
-Route::get('/mou/{id_partida}/{pos_ini}/{pos_dest}' , function($id_partida , $pos_ini ,$pos_dest){
-
-
+Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($id_partida , $pos_ini ,$pos_dest){
+	
+	return("a");
 
 });
