@@ -46,7 +46,7 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 	$partida=Partida::select('jugador1')->pluck('jugador1');
 	$partida1=Partida::select('jugador2')->pluck('jugador2');
 	header("Access-Control-Allow-Origin: *");
-	return ($partida);
+	return ($partida1);
 
 	if ($partida==$jugador1) {
 
