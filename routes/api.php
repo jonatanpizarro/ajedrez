@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\User;
 use App\Partida;
+use App\Fichas;
 
 /*
 |--------------------------------------------------------------------------
