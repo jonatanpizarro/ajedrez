@@ -46,7 +46,7 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 	if (Partida::where(['jugador1'=>$jugador1])) {
 
 		header("Access-Control-Allow-Origin: *");
-		return json_encode(array('estado'=>'Partida encontrada'));
+		return json_encode(array('estado'=>'Partida encontradaa'));
 		
 	}else if(Partida::where(['jugador2'=>$jugador1])){
 		header("Access-Control-Allow-Origin: *");
