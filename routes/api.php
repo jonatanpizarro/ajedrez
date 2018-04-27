@@ -84,11 +84,6 @@ Route::get('/en_espera/{token}' , function($token){
 	
 });
 
-Route::get('/partida/{id_partida}' , function(){
-
-	header("Access-Control-Allow-Origin: *");
-	return ($partida);
-});
 
 //login
 Route::get('/login/{name}/{password}' , function($name, $password){
@@ -146,6 +141,8 @@ Route::get('/identificadorUsuario/{nick}/{email}' , function($nick , $email){
 	$usuario->name="Cyka";
 });
 
-Route::get('/mou/{id_partida}/{fila_ini}/{col_ini}/{fila_dest}/{col_dest}' , function($id_partida , $fila_ini , $col_ini , $fila_dest, $col_dest){
+Route::get('/mou/{id_partida}/{pos_ini}/{pos_dest}' , function($id_partida , $pos_ini ,$pos_dest){
+
+
 
 });
