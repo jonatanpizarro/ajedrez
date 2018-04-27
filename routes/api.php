@@ -43,14 +43,15 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){	
 
+	$partida=Partida::select('jugador1')->get();
+	$partida1=Partida::select('jugador1')->get();
 
-
-	if (Partida::where('jugador1',$jugador1)) {
+	if ($partida==$jugador1)) {
 
 		header("Access-Control-Allow-Origin: *");
 		return json_encode(array('estado'=>'Partida encontradaa'));
 		
-	}else if(Partida::where(['jugador2'=>$jugador1])){
+	}else if($partida1==$jugador1){
 		header("Access-Control-Allow-Origin: *");
 		return json_encode(array('estado'=>'Partida encontrada'));
 
