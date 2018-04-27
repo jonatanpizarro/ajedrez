@@ -40,14 +40,14 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 	$ficha->posicion="B1";
 	$ficha->nombreFicha="Rey";
 	$ficha->jugador=$jugador1;
-	$ficha->id_partida=$idP;
+	$ficha->id_partida=$idP[0];
 	$ficha->save();
 
 	$ficha1 = new Fichas();
 	$ficha1->posicion="B8";
 	$ficha1->nombreFicha="Rey";
 	$ficha1->jugador=$jugador2;
-	$ficha1->id_partida=$idP;
+	$ficha1->id_partida=$idP[0];
 	$ficha1->save();
 
 
