@@ -162,7 +162,7 @@ Route::get('/identificadorUsuario/{nick}/{email}' , function($nick , $email){
 Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
 	Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicion'=>$pos_dest]);
 	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicion')->pluck('posicion');
-
+	header("Access-Control-Allow-Origin: *");	
 	return json_encode(array('estado'=>'ok','pos'=>$posicion ));
 
 });
