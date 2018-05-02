@@ -162,19 +162,22 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->pluck('posicionIni');
 	if ($posicion1==$pos_ini) {
-		
+
 		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
 		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$pos_dest]);
+		$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->pluck('posicionFin');
+
+		header("Access-Control-Allow-Origin: *");	
+		return json_encode(array('estado'=>'ok','posIni'=>$posicion1[0],'posFin'=>$posicion[0] ));
 		
 	}
-	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->pluck('posicionFin');
-	
-	
-
-	
-
 	header("Access-Control-Allow-Origin: *");	
-	return json_encode(array('estado'=>'ok','posIni'=>$posicion1[0],'posFin'=>$posicion[0] ));
+		return json_encode(array('estado'=>'no','posIni'=>$posicion1[0],'posFin'=>$posicion[0] ));
+	
+	
+
+	
+
 
 });
 
