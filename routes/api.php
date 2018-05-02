@@ -38,7 +38,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 	$ficha = new Fichas();
 	$ficha->posicionIni="B1";
-	$ficha->posicionFin="B1";
+	$ficha->posicionFin="";
 	$ficha->nombreFicha="Rey";
 	$ficha->jugador=$jugador1;
 	$ficha->id_partida=$idP[0];
@@ -46,7 +46,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 	$ficha1 = new Fichas();
 	$ficha1->posicionIni="B8";
-	$ficha1->posicionFin="B8";
+	$ficha1->posicionFin="";
 	$ficha1->nombreFicha="Rey";
 	$ficha1->jugador=$jugador2;
 	$ficha1->id_partida=$idP[0];
@@ -161,7 +161,7 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 
 
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-	if ($posicion1==$pos_ini) {
+	if ($posicion1[0]['posicionIni']==$pos_ini) {
 
 		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
 		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$pos_dest]);
