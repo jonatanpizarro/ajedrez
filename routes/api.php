@@ -37,14 +37,16 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 	$idP=Partida::where('jugador1',$jugador1)->select('id')->pluck('id');
 
 	$ficha = new Fichas();
-	$ficha->posicion="B1";
+	$ficha->posicionIni="B1";
+	$ficha->posicionFin="B1";
 	$ficha->nombreFicha="Rey";
 	$ficha->jugador=$jugador1;
 	$ficha->id_partida=$idP[0];
 	$ficha->save();
 
 	$ficha1 = new Fichas();
-	$ficha1->posicion="B8";
+	$ficha1->posicionIni="B8";
+	$ficha1->posicionFin="B8";
 	$ficha1->nombreFicha="Rey";
 	$ficha1->jugador=$jugador2;
 	$ficha1->id_partida=$idP[0];
@@ -153,16 +155,17 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 
 //ID cuando entras partida
-Route::get('/identificadorUsuario/{nick}/{email}' , function($nick , $email){
-	$usuario = new Usuario();
-	$usuario->id =1;
-	$usuario->name="Cyka";
-});
+
 
 Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
-	Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicion'=>$pos_dest]);
-	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicion')->pluck('posicion');
+
+	Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$pos_ini]);
+	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->pluck('posicionIni');
+
+	Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
+	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->pluck('posicionFin');
+
 	header("Access-Control-Allow-Origin: *");	
-	return json_encode(array('estado'=>'ok','pos'=>$posicion ));
+	return json_encode(array('estado'=>'ok','posIni'=>$posicion1[0],'posFin'=>$posicion[0] ));
 
 });
