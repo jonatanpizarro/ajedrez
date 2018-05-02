@@ -163,23 +163,23 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	if ($posicion1[0]['posicionIni']==$pos_ini) {
 
-		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$pos_dest]);
-		
-		$pos=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
 
-		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos[0]['posicionFin']]);
+		//$pos=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+
+		//Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos[0]['posicionFin']]);
 		
 		
 	}
 	$posicion2=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+	//$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 	
 	
 
 	
 
 	header("Access-Control-Allow-Origin: *");	
-	return json_encode(array('estado'=>'ok','posIni'=>$posicion2[0]['posicionIni'],'posFin'=>$posicion[0]['posicionFin'] ));
+	return json_encode(array('estado'=>'ok','posIni'=>$posicion2[0]['posicionIni']));
 
 });
 
