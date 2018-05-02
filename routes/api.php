@@ -175,7 +175,7 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 	
 
 	header("Access-Control-Allow-Origin: *");	
-	return json_encode(array('estado'=>'ok','posIni'=>$posicion2[0],'posFin'=>$posicion ));
+	return json_encode(array('estado'=>'ok','posIni'=>$posicion2[0]['posicionIni'],'posFin'=>$posicion ));
 
 });
 
