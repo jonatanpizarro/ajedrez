@@ -190,7 +190,7 @@ Route::get('/ver/{jugador}/{id_partida}' , function($jugador,$id_partida){
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 
-	header("Access-Control-Allow-Origin: *");	
+	header("Access-Control-Allow-Origin: *");		
 	return json_encode(array('estado'=>'ok','pos'=>$posicion1[0]['posicionIni'] , 'posFin'=>$posicion[0]['posicionFin'] ));
 
 });
