@@ -186,7 +186,8 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 
 
 Route::get('/ver/{jugador}/{id_partida}' , function($jugador,$id_partida){
-
+	header("Access-Control-Allow-Origin: *");
+	return("a");
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 
