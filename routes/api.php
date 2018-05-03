@@ -154,7 +154,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 });
 
 
-//ID cuando entras partida
+
 
 
 Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
@@ -168,6 +168,8 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 		//$pos=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 
 		Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_ini]);
+		header("Access-Control-Allow-Origin: *");	
+		return ("Updated");
 		
 		
 	}
