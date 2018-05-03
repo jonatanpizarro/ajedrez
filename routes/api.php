@@ -197,8 +197,12 @@ Route::get('/ver/{jugador}/{id_partida}' , function($jugador,$id_partida){
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 
+	$pos1==Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
+	$pos=Fichas::where('jugador' ,'!=',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+
 	header("Access-Control-Allow-Origin: *");		
-	return json_encode(array('estado'=>'ok','pos'=>$posicion1[0]['posicionIni'] , 'posFin'=>$posicion[0]['posicionFin'] ));
+	return json_encode(array('estado'=>'ok','pos'=>$posicion1[0]['posicionIni'] , 'posFin'=>$posicion[0]['posicionFin']
+													,'pos1'=>$pos1[0]['posicionIni'] , 'posFin1'=>$pos[0]['posicionFin'] ));
 
 });
 
