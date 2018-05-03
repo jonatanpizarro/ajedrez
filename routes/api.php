@@ -159,7 +159,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
 
-	return($pos_ini[0].$pos_ini[1]);
+	return($pos_ini[0]);
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	if ($posicion1[0]['posicionIni']==$pos_ini) {
 
