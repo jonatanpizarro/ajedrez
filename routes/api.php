@@ -133,18 +133,10 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 				return json_encode(array('estado'=>'ok','token' =>$token, 'id'=>$id ));
 			}
 
-			
-			//$token = User::where('name',$name )->select('api_token')->get();
-			//return($user);
+
 		}
 			
 
-	/*else if(Auth::attempt(['name'=> $name, 'password'=>$password])){
-			$token = User::where('name',$name )->select('api_token')->get();
-			header("Access-Control-Allow-Origin: *");
-			return json_encode(array('estado'=>'ok','token' =>$user ));
-			
-		}	*/
 	
 
 	else {
@@ -168,12 +160,9 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 
 			$posicionIni=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 
-			//Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$pos_dest]);
-			//$pos=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 
 			Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
-			//header("Access-Control-Allow-Origin: *");	
-			//return ("Updated");
+
 			$posicionFin=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 
 			header("Access-Control-Allow-Origin: *");	
@@ -203,14 +192,12 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 Route::get('/ver/{jugador}/{id_partida}' , function($jugador,$id_partida){
 
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-	$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
 
 	$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-	$pos=Fichas::where('jugador' ,'!=',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+
 
 	header("Access-Control-Allow-Origin: *");		
-	return json_encode(array('estado'=>'ok','pos'=>$posicion1[0]['posicionIni'] , 'posFin'=>$posicion[0]['posicionFin']
-													,'pos1'=>$pos1[0]['posicionIni'] , 'posFin1'=>$pos[0]['posicionFin'] ));
+	return json_encode(array('estado'=>'ok','pos'=>$posicion1[0]['posicionIni'],'pos1'=>$pos1[0]['posicionIni']));
 
 });
 
