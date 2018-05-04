@@ -149,7 +149,7 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 
 
-Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
+Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
 
 	$fila=$pos_dest[0];
 	$column=$pos_dest[1];
@@ -164,6 +164,12 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 			Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
 
 			$posicionFin=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
+			$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
+
+
+			if ($posicionFin[0]['posicionIni']==$pos1[0]['posicionIni']) {
+				Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->delete();
+			}
 
 			header("Access-Control-Allow-Origin: *");	
 			return json_encode(array('estado'=>'ok','posIni'=>$posicionIni[0]['posicionIni'],'posFin'=>$posicionFin[0]['posicionIni'] ));
@@ -189,11 +195,16 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}' , function($jugado
 });
 
 
-Route::get('/ver/{jugador}/{id_partida}' , function($jugador,$id_partida){
+Route::get('/ver/{jugador}/{id_partida}/{token}' , function($jugador,$id_partida){
 
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-
 	$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
+
+	if ($posicion1=="") {
+		return("Pos 1 borrada")
+	}else if($pos1==""){
+		return("Ficha enemiga borrada")
+	}
 
 
 	header("Access-Control-Allow-Origin: *");		
