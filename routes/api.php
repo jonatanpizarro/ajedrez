@@ -201,9 +201,9 @@ Route::get('/ver/{jugador}/{id_partida}/{token}' , function($jugador,$id_partida
 	$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 
 	if ($posicion1=="") {
-		return("Pos 1 borrada")
+		return("Pos 1 borrada");
 	}else if($pos1==""){
-		return("Ficha enemiga borrada")
+		return("Ficha enemiga borrada");
 	}
 
 
