@@ -26,6 +26,8 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 	User::where('api_token', $token)->update(['espera'=>0]);
 	User::where('id', $jugador2)->update(['espera'=>0]);
 
+	$user=User::where('api_token', $token)->select('id')->get();
+
 
 
 	$partida = new Partida();
@@ -55,7 +57,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 
 	header("Access-Control-Allow-Origin: *");
-	return ($partida);
+	return json_encode(array('estado'=>'Partida creada' , 'idPartida' =>$idP));
 
 });
 
