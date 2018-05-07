@@ -159,7 +159,8 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function
 		if ($posicion1[0]['posicionIni']==$pos_ini) {
 
 			$posicionIni=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-			Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$posicionIni[0]['posicionIni']]);
+			$pos=$posicionIni[0]['posicionIni'];
+			Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionFin'=>$pos]);
 
 			Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
 
