@@ -193,7 +193,7 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function
 });
 
 
-Route::get('/ver/{jugador}/{id_partida}' , function($jugador,$id_partida){
+Route::get('/ver/{jugador}/{id_partida}/{token}' , function($jugador,$id_partida){
 
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
