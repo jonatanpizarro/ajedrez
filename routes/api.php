@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Creo la partia con las fichas y cambio el estado de espera a 0
 Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$jugador2,$token){	
 	
 	User::where('api_token', $token)->update(['espera'=>0]);
@@ -61,7 +62,7 @@ Route::get('/crear_partida/{jugador1}/{jugador2}/{token}' , function($jugador1,$
 
 });
 
-
+//Compruebo si me han invitado a alguna partida y si es asi me mete directamente
 
 Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){	
 
@@ -70,6 +71,7 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 
 	if ($partida[0]==$jugador1) {
 		$idPartida=Partida::where('jugador1' , $jugador1)->select('id')->pluck('id');
+		User::where('api_token', $token)->update(['espera'=>0]);
 		
 
 		header("Access-Control-Allow-Origin: *");
@@ -77,6 +79,7 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 		
 	}else if($partida1[0]==$jugador1){
 		$idPartida=Partida::where('jugador2' , $jugador1)->select('id')->pluck('id');
+		User::where('api_token', $token)->update(['espera'=>0]);
 
 		header("Access-Control-Allow-Origin: *");
 		return json_encode(array('estado'=>'Partida encontrada' , 'idPartida' =>$idPartida));
@@ -95,7 +98,7 @@ Route::get('/comprovar_partida/{jugador1}/{token}' , function($jugador1,$token){
 
 });
 
-
+//Actualizo el estado de los jugadores por si estan buscando partida
 Route::get('/en_espera/{token}' , function($token){
 	
 	$espera = User::where('espera', 1)->where('api_token','!=',$token)->select('name')->get();
@@ -150,7 +153,13 @@ Route::get('/login/{name}/{password}' , function($name, $password){
 
 
 
+/*Muevo ficha y compruebo y guardo  la posicion inicial y me muevo a la posicion destino , tambien controlo que se mueva como una torre
 
+	CUIDADO : EN POSICIONINI GUARDO LA FINAL Y EN POSICIONFIN LA INICIAL
+
+	
+
+*/
 Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function($jugador,$id_partida , $pos_ini ,$pos_dest){
 
 	$fila=$pos_dest[0];
@@ -167,7 +176,7 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function
 			Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->update(['posicionIni'=>$pos_dest]);
 
 			$posicionFin=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-			$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
+
 
 
 
@@ -182,9 +191,9 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function
 
 	}
 	
-	//$posicion2=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
+
 	$posicionFin=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-	//$posicion=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+
 	
 	
 
@@ -195,11 +204,11 @@ Route::get('/mou/{jugador}/{id_partida}/{pos_ini}/{pos_dest}/{token}' , function
 
 });
 
-
+//Actualizo el movimiento de la ficha , cojo la mia inicial para moverme  y la inicial y final del rival para poder borrar la posicion antigua de la ficha y moverla al lugar nuevo
 Route::get('/ver/{jugador}/{id_partida}/{token}' , function($jugador,$id_partida){
 
 	$posicion1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
-	//$posicionFin1=Fichas::where('jugador',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
+	
 
 	$pos1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionIni')->get();
 	$posFin1=Fichas::where('jugador','!=',$jugador)->where('id_partida',$id_partida)->select('posicionFin')->get();
